@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo sed -i 's/DocumentRoot "\/var\/www\/html"/DocumentRoot "\/var\/www\/html\/chango"/; s/AllowOverride None/AllowOverride All/' /etc/httpd/conf/httpd.conf
+service httpd restart

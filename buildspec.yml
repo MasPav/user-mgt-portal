@@ -1,0 +1,38 @@
+version: 0.2
+
+env:
+  # param store values(Chango_API_URL_UAT etc) must be created in parameter store. PLan to include this in stack in future.
+  parameter-store:
+     API_URL: "CHANGO_API_URL"
+     APP_NAME: "CHANGO_APP_NAME"
+     LOCAL_STORAGE_KEY: "CHANGO_LOCAL_STORAGE_KEY"
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - node -v
+  pre_build:
+    commands:
+      # - Creates an .env file in the build environment with values from paramstore
+      - touch .env
+      - echo "APP_NAME=${APP_NAME}" >> .env
+      - echo "API_URL=${API_URL}" >> .env
+      - echo "LOCAL_STORAGE_KEY=${LOCAL_STORAGE_KEY}" >> .env
+
+  build:
+    commands:
+      - npm install
+      - npm run build-prod
+      - ls -lh dist
+      # Just to see the resulting environment files created in the build env, values are hashed
+      - cat ./src/environments/environment.ts
+      - cat ./src/environments/environment.prod.ts
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+     - dist/**/*
+     - appspec.yml
+     - scripts/*

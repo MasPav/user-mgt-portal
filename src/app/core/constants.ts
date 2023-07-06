@@ -1,0 +1,13 @@
+import { environment } from "../../environments/environment"
+
+export const CONSTANTS = {
+  APPNAME: environment.APP_NAME,
+  APIURL: environment.API_URL,
+  LOCALSTORAGEKEY: environment.LOCAL_STORAGE_KEY,
+  RAWDATEFORMAT: "YYYY-MM-DD",
+  DATEFORMAT: "DD MMM, YYYY",
+  TOASTTIMEOUT: 8000,
+  SESSIONTIMEOUTCOUNTDOWN: environment.SESSION_TIMEOUT_COUNTDOWN,
+  SESSIONTIMEOUT: environment.SESSION_TIMEOUT,
+  USERTOKENTIMEOUT: 3600
+}
